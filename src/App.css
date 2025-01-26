@@ -2,37 +2,87 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.text-background{
+  background-color: #f4f4f4;
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  display: inline-block; 
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #819ca1;
+  /*background-image: url(/Users/martinearle/Downloads/116434799_10223312216414516_6939338945100287664_n.jpg);*/
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top right;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: calc(10px + 1vmin);
+  font-synthesis: style weight;
+  color: rgb(0, 0, 0);
 }
 
-.App-link {
-  color: #61dafb;
+table {
+  border-collapse: collapse;
+  width: 80%; 
+  margin: 20px 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+thead th {
+  background-color: #6f2020;
+  color: #ffffff;
+  padding: 10px;
+  border: 1px solid #ffffff;
+  font-weight: bold;
+}
+
+tbody td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #cccccc; 
+  font-size: 1rem;
+}
+
+tbody th {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  font-weight: bold;
+}
+
+tbody td:hover {
+  background-color: #499296;
+  cursor: pointer;
+}
+
+tbody tr {
+  background-color: #ffffff;
+  opacity: 5;
+}
+
+table, th, td {
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+button{
+  background-color: rgb(61, 141, 163);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  font: 1em sans-serif;
+  position: relative;
+  display: inline-block;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  border: none;
+  font-family: 'Roboto', Helvetica;
+}
+
+button:hover{
+  background-color: rgb(172, 67, 67);
 }
