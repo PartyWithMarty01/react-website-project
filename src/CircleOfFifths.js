@@ -51,6 +51,9 @@ const CircleOfFifths = () => {
 
           {/* column 2 */}
           <div style={{
+            marginLeft: "auto",
+            marginRight: "3em",
+            marginBottom: "2em",
             width: `${circleDiameterPx}px`,
             height: `${circleDiameterPx}px`,
           }} >
