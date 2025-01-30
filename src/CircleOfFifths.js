@@ -13,73 +13,77 @@ const CircleOfFifths = () => {
     <div style={{ textAlign: "center", margin: "50px" }}>
       <h1>Circle of Fifths</h1>
 
-      <div
-        style={{
-          position: "absolute",
-          width: `${circleDiameterPx}px`,
-          height: `${circleDiameterPx}px`,
-          top: "50%",
-          left: "50%",
-          borderRadius: "50%",
-          border: "1px solid black",
-        }}
-      >
+      <div style={{
+        width: `${circleDiameterPx}px`,
+        height: `${circleDiameterPx}px`,
+      }} >
+        <div
+          style={{
+            position: "absolute",
+            width: `${circleDiameterPx}px`,
+            height: `${circleDiameterPx}px`,
+            borderRadius: "50%",
+            border: "1px solid black",
+          }}
+        >
 
-        {majorKeys.map((key, index) => (
-          <div
-            key={key}
-            // place letters around the outer edge of circle
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: `rotate(${(index) * 45}deg) translate(0px, -${transformOriginPx - distanceMajorKeysFromEdgePx}px)`,
-              transformOrigin: `0px 0px`,
-            }}
-          >
+          {majorKeys.map((key, index) => (
             <div
-              // rotate the letter so it's upright
+              key={key}
+              // place letters around the outer edge of circle
               style={{
                 position: "absolute",
-                transform: `rotate(-${index * 45}deg) translate(-50%, 0px)`,
-                top: "0px",
-                transformOrigin: `0% 50%`,
-                fontWeight: "bold",
-                textAlign: "center"
+                top: "50%",
+                left: "50%",
+                transform: `rotate(${(index) * 45}deg) translate(0px, -${transformOriginPx - distanceMajorKeysFromEdgePx}px)`,
+                transformOrigin: `0px 0px`,
               }}
             >
-              {key}
+              <div
+                // rotate the letter so it's upright
+                style={{
+                  position: "absolute",
+                  transform: `rotate(-${index * 45}deg) translate(-50%, 0px)`,
+                  top: "0px",
+                  transformOrigin: `0% 50%`,
+                  fontWeight: "bold",
+                  textAlign: "center"
+                }}
+              >
+                {key}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        {minorKeys.map((key, index) => (
-          <div
-            key={key}
-            // place letters around the outer edge of circle
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: `rotate(${(index) * 45}deg) translate(0px, -${transformOriginPx - distanceMinorKeysFromEdgePx}px)`,
-              transformOrigin: `0px 0px`,
-            }}
-          >
+          {minorKeys.map((key, index) => (
             <div
-              // rotate the letter so it's upright
+              key={key}
+              // place letters around the outer edge of circle
               style={{
                 position: "absolute",
-                transform: `rotate(-${index * 45}deg) translate(-50%, 0px)`,
-                top: "0px",
-                transformOrigin: `0% 50%`,
-                fontSize: "14px",
+                top: "50%",
+                left: "50%",
+                transform: `rotate(${(index) * 45}deg) translate(0px, -${transformOriginPx - distanceMinorKeysFromEdgePx}px)`,
+                transformOrigin: `0px 0px`,
               }}
             >
-              {key}
+              <div
+                // rotate the letter so it's upright
+                style={{
+                  position: "absolute",
+                  transform: `rotate(-${index * 45}deg) translate(-50%, 0px)`,
+                  top: "0px",
+                  transformOrigin: `0% 50%`,
+                  fontSize: "14px",
+                }}
+              >
+                {key}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+
 
       <div
         style={{
