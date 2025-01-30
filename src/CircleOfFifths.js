@@ -4,6 +4,11 @@ const CircleOfFifths = () => {
   const majorKeys = ["C", "G", "D", "A", "E", "B", "F#", "C#"];
   const minorKeys = ["Am", "Em", "Bm", "F#m", "C#m", "G#m", "D#m", "A#m"];
 
+  const circleDiameterPx = 300;
+  const distanceMajorKeysFromEdgePx = 10;
+  const distanceMinorKeysFromEdgePx = 40;
+  const transformOriginPx = circleDiameterPx / 2;
+
   return (
     <div style={{ textAlign: "center", margin: "50px" }}>
       <h1>Circle of Fifths</h1>
@@ -11,8 +16,8 @@ const CircleOfFifths = () => {
       <div
         style={{
           position: "absolute",
-          width: "300px",
-          height: "300px",
+          width: `${circleDiameterPx}px`,
+          height: `${circleDiameterPx}px`,
           top: "50%",
           left: "50%",
           borderRadius: "50%",
@@ -23,18 +28,24 @@ const CircleOfFifths = () => {
         {majorKeys.map((key, index) => (
           <div
             key={key}
+            // place letters around the outer edge of circle
             style={{
               position: "absolute",
               top: "50%",
               left: "50%",
-              transform: `rotate(${index * 45}deg) translate(0, -120px)`,
-              transformOrigin: "0 100%",
+              transform: `rotate(${(index) * 45}deg) translate(0px, -${transformOriginPx - distanceMajorKeysFromEdgePx}px)`,
+              transformOrigin: `0px 0px`,
             }}
           >
             <div
+              // rotate the letter so it's upright
               style={{
-                transform: `rotate(-${index * 45}deg)`, 
+                position: "absolute",
+                transform: `rotate(-${index * 45}deg) translate(-50%, 0px)`,
+                top: "0px",
+                transformOrigin: `0% 50%`,
                 fontWeight: "bold",
+                textAlign: "center"
               }}
             >
               {key}
@@ -45,17 +56,22 @@ const CircleOfFifths = () => {
         {minorKeys.map((key, index) => (
           <div
             key={key}
+            // place letters around the outer edge of circle
             style={{
               position: "absolute",
               top: "50%",
               left: "50%",
-              transform: `rotate(${index * 45}deg) translate(0, -80px)`,
-              transformOrigin: "0 100%",
+              transform: `rotate(${(index) * 45}deg) translate(0px, -${transformOriginPx - distanceMinorKeysFromEdgePx}px)`,
+              transformOrigin: `0px 0px`,
             }}
           >
             <div
+              // rotate the letter so it's upright
               style={{
-                transform: `rotate(-${index * 45}deg)`, 
+                position: "absolute",
+                transform: `rotate(-${index * 45}deg) translate(-50%, 0px)`,
+                top: "0px",
+                transformOrigin: `0% 50%`,
                 fontSize: "14px",
               }}
             >
