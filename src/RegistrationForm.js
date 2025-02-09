@@ -16,9 +16,15 @@ const RegistrationForm = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Submitted Data:", formData);
+  };
+
+  const studentInfo = {
+    name: '${formData.firstName} ${formData.lastName}',
+    email: formData.email,
+    password: formData.password
   };
 
 
