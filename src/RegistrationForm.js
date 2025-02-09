@@ -27,6 +27,13 @@ const RegistrationForm = () => {
     password: formData.password
   };
 
+  const response = fetch("https://localhost:4000/registration-form", {
+  method: "POST",
+  headers: {
+    "Content-type": "application/json"
+   },
+   body:JSON.stringify(studentInfo)});
+
 
   return (
     <div>
