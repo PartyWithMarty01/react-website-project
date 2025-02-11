@@ -19,6 +19,32 @@ function GenStudentInfo() {
 
     console.log({studentData})
 
+    const handleDelete = async (studentId) => {
+        const confirmDeletion = window.confirm('Are you sure you want to delete this student? (OK/CANCEL)')
+
+        if (!confirmDeletion) return;
+
+        try {
+            const response = await fetch(`http://localhost:4000/${studentId}`, {
+                method: "DELETE",
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to delete student!");
+            }
+
+            alert(`Student ID ${studentId} deleted successfully!`);
+
+            setStudentData(prevData => {
+                const updatedUsers = { ...prevData.users };
+                delete updatedUsers[studentId];
+                return { users: updatedUsers };
+            });
+        } catch (error) {
+            console.error("Error deleting student:", error);
+            alert("Failed to delete student");
+    }
+};
     return (
         <div>
             <button onClick={fetchStudentData}>
@@ -34,10 +60,11 @@ function GenStudentInfo() {
                     <h2>Middle Earth's School of Rock - Student Information:</h2>
                     {Object.entries(studentData.users).map(user => {
                         const [key, value] = user
-                        return <div key={value.name}>
+                        return <div key={key}>
                             <p>ID: {key}</p>
                             <p>Name: {value.name}</p>
                             <p>Age: {value.age}</p>
+                            <button onClick={() => handleDelete(key)}>Delete</button>
                         </div>
 })}
                 </div>
