@@ -5,6 +5,7 @@ const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    age: "",
     email: "",
     password: ""
   });
@@ -24,7 +25,8 @@ const RegistrationForm = () => {
     const studentInfo = {
       name: `${formData.firstName} ${formData.lastName}`,
       email: formData.email,
-      password: formData.password
+      password: formData.password,
+      age: formData.age
     };
   
     const response = fetch("http://localhost:4000/registration-form", {
@@ -57,6 +59,17 @@ const RegistrationForm = () => {
             type="text"
             name="lastName"
             value={formData.lastName}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          Age:
+          <input
+            type="age"
+            name="age"
+            value={formData.age}
             onChange={handleChange}
             required
           />
