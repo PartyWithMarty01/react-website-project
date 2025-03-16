@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 
 const RegistrationForm = () => {
+  //Define state on the react component that will hold data of the form.
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    age: "",
     email: "",
     password: ""
   });
@@ -16,17 +18,25 @@ const RegistrationForm = () => {
     });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = (event) => {
+    //event.preventDefault();
     console.log("Submitted Data:", formData);
-  };
 
-  const studentInfo = {
-    name: '${formData.firstName} ${formData.lastName}',
-    email: formData.email,
-    password: formData.password
+    const studentInfo = {
+      name: `${formData.firstName} ${formData.lastName}`,
+      email: formData.email,
+      password: formData.password,
+      age: formData.age
+    };
+  
+    const response = fetch("http://localhost:4000/registration-form", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json"
+     },
+     body:JSON.stringify(studentInfo)});
+  
   };
-
 
   return (
     <div>
@@ -49,6 +59,17 @@ const RegistrationForm = () => {
             type="text"
             name="lastName"
             value={formData.lastName}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          Age:
+          <input
+            type="age"
+            name="age"
+            value={formData.age}
             onChange={handleChange}
             required
           />
