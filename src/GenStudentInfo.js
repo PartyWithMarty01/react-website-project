@@ -65,7 +65,7 @@ function GenStudentInfo() {
                 throw new Error("Failed to delete student!");
             }
 
-            alert(`Student ID ${studentId} deleted successfully!`);
+            console.log(`Student ID ${studentId} deleted successfully!`);
 
             setStudentData(prevData => {
                 const updatedUsers = { ...prevData.users };
