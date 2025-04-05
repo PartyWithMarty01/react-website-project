@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function GenStudentInfo() {
@@ -20,6 +20,10 @@ function GenStudentInfo() {
       setErrorData(error);
     }
   };
+
+  useEffect(() => {
+    fetchStudentData();
+  }, []);
 
   const handlePost = async (studentId) => {
     const confirmUpdate = window.confirm(
@@ -104,8 +108,6 @@ function GenStudentInfo() {
 
   return (
     <div>
-      <button onClick={fetchStudentData}>Fetch student data</button>
-
       {errorData && <div>error: {errorData.toString()}</div>}
 
       {studentData && (
