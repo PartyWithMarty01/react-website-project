@@ -44,11 +44,7 @@ function GenStudentInfo() {
         throw new Error("Failed to update student!");
       }
 
-      setStudentIdBeingEdited(null);
-      setNameEdit(null);
-      setAgeEdit(null);
-
-      alert(`Student ID ${studentId} updated successfully!`);
+      clearEditingStudent();
 
       setStudentData((prevData) => {
         const updatedUsers = { ...prevData.users };
@@ -93,6 +89,12 @@ function GenStudentInfo() {
     }
   };
 
+  function clearEditingStudent() {
+    setStudentIdBeingEdited(null);
+    setNameEdit(null);
+    setAgeEdit(null);
+  }
+
   function editStudent(id) {
     setStudentIdBeingEdited(id);
     const student = studentData.users[id];
@@ -131,6 +133,7 @@ function GenStudentInfo() {
                     ></input>
                   </p>
                   <button onClick={() => handlePost(key)}>Submit</button>
+                  <button onClick={() => clearEditingStudent()}>Cancel</button>
                 </div>
               );
             }
