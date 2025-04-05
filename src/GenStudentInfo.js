@@ -93,6 +93,13 @@ function GenStudentInfo() {
     }
   };
 
+  function editStudent(id) {
+    setStudentIdBeingEdited(id);
+    const student = studentData.users[id];
+    setNameEdit(student.name);
+    setAgeEdit(student.age);
+  }
+
   return (
     <div>
       <button onClick={fetchStudentData}>Fetch student data</button>
@@ -134,9 +141,7 @@ function GenStudentInfo() {
                 <p>Name: {value.name}</p>
                 <p>Age: {value.age}</p>
                 <button onClick={() => handleDelete(key)}>Delete</button>
-                <button onClick={() => setStudentIdBeingEdited(key)}>
-                  Edit
-                </button>
+                <button onClick={() => editStudent(key)}>Edit</button>
               </div>
             );
           })}
