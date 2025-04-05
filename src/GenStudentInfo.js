@@ -129,7 +129,9 @@ function GenStudentInfo() {
                     <input
                       type="number"
                       value={ageEdit}
-                      onChange={(e) => setAgeEdit(parseInt(e.target.value))}
+                      onChange={(e) =>
+                        setAgeEdit(parseInt(e.target.value || "0"))
+                      }
                     ></input>
                   </p>
                   <button onClick={() => handlePost(key)}>Submit</button>
