@@ -16,7 +16,7 @@ const RegistrationForm = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Submitted Data:", formData);
 
@@ -25,13 +25,17 @@ const RegistrationForm = () => {
       age: formData.age,
     };
 
-    const response = fetch("http://localhost:4000/", {
+    const response = await fetch("http://localhost:4000/", {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify(studentInfo),
     });
+
+    if (response.ok) {
+      window.location.replace("http://localhost:3000/student-information");
+    }
   };
 
   return (
@@ -80,4 +84,3 @@ const RegistrationForm = () => {
   );
 };
 export default RegistrationForm;
-
