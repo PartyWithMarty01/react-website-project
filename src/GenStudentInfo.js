@@ -43,10 +43,11 @@ function GenStudentInfo() {
           age: ageEdit,
         }),
       });
-
+      
       if (!response.ok) {
         throw new Error("Failed to update student!");
       }
+      
 
       clearEditingStudent();
 
@@ -115,7 +116,7 @@ function GenStudentInfo() {
           <h2>Middle Earth's School of Rock - Student Information:</h2>
           {Object.entries(studentData.users).map((user) => {
             const [key, value] = user;
-            if (studentIdBeingEdited == key) {
+            if (studentIdBeingEdited === key) {
               return (
                 <div key={key}>
                   <p>We are editing student number {key}</p>
