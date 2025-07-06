@@ -43,7 +43,7 @@ function GenStudentInfo() {
           age: ageEdit,
         }),
       });
-      
+
       if (!response.ok) {
         throw new Error("Failed to update student!");
       }

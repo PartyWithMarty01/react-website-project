@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import CircleOfFifths from './CircleOfFifths';
 import GenStudentInfo from './GenStudentInfo';
 import RegistrationForm from './RegistrationForm';
+import LessonManager from '/Users/martinearle/react-demo/src/LessonsManager.js';
 
 const chromaticScale = ['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#'];
 
@@ -47,6 +48,7 @@ function App() {
   // useEffect(() => {fetchAndLogData()}, [])
   // console.log(backEndData)
 
+
   return (
     <Router>
       <div className="App">
@@ -66,6 +68,7 @@ function App() {
             <Link to="/circle-of-fifths" style={{ margin: '10px' }}>Circle of Fifths</Link>
             <Link to="/student-information" style={{ margin: '10px' }}>Student Info</Link>
             <Link to="/registration-form" style={{ margin: '10px' }}>Registration Form</Link>
+            <Link to="/lessons-manager" style={{ margin: '10px' }}>Lessons Manager</Link>
           </nav>
 
           <Routes>
@@ -109,6 +112,7 @@ function App() {
             <Route path='/circle-of-fifths' element={<CircleOfFifths />} />
             <Route path='/student-information' element={<GenStudentInfo />} />
             <Route path="/registration-form" element={<RegistrationForm />} />
+            <Route path="/lessons-manager" element={<LessonManager/>}/>
             
           </Routes>
         </header>
