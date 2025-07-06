@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 function LessonsManager() {
     const[selectedStudent, setSelectedStudent] = useState('');
-    onst [students, setStudents] = useState({});
+    const [students, setStudents] = useState({});
 
     useEffect(() => {
         fetchStudents();
     }, []);
 
     const fetchStudents = async () => {
+        //This fecthes the students
         try {
             const res = await fetch('http://localhost:4000/');
             const data = await res.json();
@@ -17,6 +18,25 @@ function LessonsManager() {
             console.error("Error fetching students:", err);
         }
     };
+
+    const addLessons = async() => {
+        //Here I will be adding a lesson to a student
+        try {
+        const res = await fetch('http://localhost:4000/lessons', {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({student_id: selectedStudent})
+                });
+            const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error("Failed to create lesson!");
+      } }
+            catch(err) {
+                console.error(err);
+                alert("ERROR, your lesson was not created!")
+      }
+    }
 
     return(
         <div className="App">
@@ -31,8 +51,7 @@ function LessonsManager() {
                     </option>
                 ))}
             </select>
-
-            <button>Create Lesson</button>
+            <button onClick={addLessons}>Create Lesson</button>
         </div>
     )
 }
