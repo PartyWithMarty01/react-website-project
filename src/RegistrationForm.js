@@ -25,7 +25,7 @@ const RegistrationForm = () => {
       age: formData.age,
     };
 
-    const response = await fetch("http://localhost:4000/", {
+    const responseUser = await fetch("http://localhost:4000/users", {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
@@ -33,9 +33,33 @@ const RegistrationForm = () => {
       body: JSON.stringify(studentInfo),
     });
 
-    if (response.ok) {
-      window.location.replace("http://localhost:3000/student-information");
+     if (!responseUser.ok) {
+      alert("Failed to create student");
+      return;
     }
+
+    const userData = await responseUser.json();
+    const studentId = userData.id; 
+    console.log("Created student:", userData);
+
+    const responseLesson = await fetch("http://localhost:4000/lessons", {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({student_id: studentId}),
+    });
+
+    if (!responseLesson.ok) {
+      alert("Failed to create lesson");
+      return;
+    }
+
+    const lessonData = await responseLesson.json();
+    console.log("Created lesson:", lessonData);
+
+    window.location.replace("http://localhost:3000/student-information");
+
   };
 
   return (
@@ -70,7 +94,7 @@ const RegistrationForm = () => {
           <label>
             Age:
             <input
-              type="age"
+              type="number"
               name="age"
               value={formData.age}
               onChange={handleChange}

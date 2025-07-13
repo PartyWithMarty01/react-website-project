@@ -55,5 +55,6 @@ function LessonsManager() {
         </div>
     )
 }
+print(LessonsManager)
 
 export default LessonsManager;
