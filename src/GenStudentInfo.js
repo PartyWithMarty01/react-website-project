@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import { fetchStudents, deleteStudent, updateStudent } from "./api/studentApi.js";
 
 function GenStudentInfo() {
+  // initializing state variables
   const [studentData, setStudentData] = useState(null);
   const [errorData, setErrorData] = useState(null);
 
@@ -9,90 +11,42 @@ function GenStudentInfo() {
   const [nameEdit, setNameEdit] = useState(null);
   const [ageEdit, setAgeEdit] = useState(null);
 
-  const fetchStudentData = async () => {
-    try {
-      const response = await fetch("http://localhost:4000");
-      const data = await response.json();
+  // this useeffect runs when the component is loaded
+  useEffect(() => {
+    const loadStudents = async () => { 
+      const [data, error] = await fetchStudents(); 
       setStudentData(data);
-      setErrorData(null);
-    } catch (error) {
-      console.error("Error fetching student data:", error);
       setErrorData(error);
     }
-  };
-
-  useEffect(() => {
-    fetchStudentData();
+    loadStudents();
   }, []);
 
-  const handlePost = async (studentId) => {
-    const confirmUpdate = window.confirm(
-      "Are you sure you want to update this student?",
-    );
+  const onEditStudentClick = async(studentIdBeingEdited) => {
+    // calling api
+    await updateStudent(studentIdBeingEdited, nameEdit, ageEdit);
 
-    if (!confirmUpdate) return;
+    // setting component state
+    setStudentData((prevData) => {
+      const updatedUsers = { ...prevData.users };
 
-    try {
-      const response = await fetch(`http://localhost:4000/${studentId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: nameEdit,
-          age: ageEdit,
-        }),
-      });
+      updatedUsers[studentIdBeingEdited] = {
+        ...updatedUsers[studentIdBeingEdited],
+        name: nameEdit,
+        age: ageEdit,
+      };
+      return { users: updatedUsers };
+    });
+    clearEditingStudent();
+  }
 
-      if (!response.ok) {
-        throw new Error("Failed to update student!");
-      }
-      
-
-      clearEditingStudent();
-
-      setStudentData((prevData) => {
-        const updatedUsers = { ...prevData.users };
-        updatedUsers[studentId] = {
-          ...updatedUsers[studentId],
-          name: nameEdit,
-          age: ageEdit,
-        };
-        return { users: updatedUsers };
-      });
-    } catch (error) {
-      console.error("Error updating student:", error);
-      alert("Failed to update student");
-    }
-  };
-  const handleDelete = async (studentId) => {
-    const confirmDeletion = window.confirm(
-      "Are you sure you want to delete this student? (OK/CANCEL)",
-    );
-
-    if (!confirmDeletion) return;
-
-    try {
-      const response = await fetch(`http://localhost:4000/${studentId}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete student!");
-      }
-
-      console.log(`Student ID ${studentId} deleted successfully!`);
-
-      setStudentData((prevData) => {
+  const onDeleteStudentClick = async (studentId) => {
+      await deleteStudent(studentId);// api
+      setStudentData((prevData) => { // component state
         const updatedUsers = { ...prevData.users };
         delete updatedUsers[studentId];
         return { users: updatedUsers };
       });
-    } catch (error) {
-      console.error("Error deleting student:", error);
-      alert("Failed to delete student");
-    }
-  };
+  }
 
   function clearEditingStudent() {
     setStudentIdBeingEdited(null);
@@ -107,6 +61,7 @@ function GenStudentInfo() {
     setAgeEdit(student.age);
   }
 
+  // render (pure view)
   return (
     <div>
       {errorData && <div>error: {errorData.toString()}</div>}
@@ -137,7 +92,7 @@ function GenStudentInfo() {
                       }
                     ></input>
                   </p>
-                  <button onClick={() => handlePost(key)}>Submit</button>
+                  <button onClick={() => onEditStudentClick(key)}>Submit</button>
                   <button onClick={() => clearEditingStudent()}>Cancel</button>
                 </div>
               );
@@ -148,7 +103,7 @@ function GenStudentInfo() {
                 <p>ID: {key}</p>
                 <p>Name: {value.name}</p>
                 <p>Age: {value.age}</p>
-                <button onClick={() => handleDelete(key)}>Delete</button>
+                <button onClick={() => onDeleteStudentClick(key)}>Delete</button>
                 <button onClick={() => editStudent(key)}>Edit</button>
               </div>
             );

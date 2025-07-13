@@ -27,7 +27,7 @@ function LessonsManager() {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({student_id: selectedStudent})
                 });
-            const data = await res.json();
+            // const data = await res.json();
 
         if (!res.ok) {
             throw new Error("Failed to create lesson!");
@@ -55,6 +55,5 @@ function LessonsManager() {
         </div>
     )
 }
-print(LessonsManager)
 
 export default LessonsManager;
