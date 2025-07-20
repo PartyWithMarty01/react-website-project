@@ -5,6 +5,7 @@ import CircleOfFifths from './CircleOfFifths';
 import GenStudentInfo from './GenStudentInfo';
 import RegistrationForm from './RegistrationForm';
 import LessonManager from '/Users/martinearle/react-demo/src/LessonsManager.js';
+import LessonManager from "./LessonsManager.js";
 
 const chromaticScale = ['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#'];
 
