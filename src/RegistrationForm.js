@@ -58,7 +58,7 @@ const RegistrationForm = () => {
     const lessonData = await responseLesson.json();
     console.log("Created lesson:", lessonData);
 
-    window.location.replace("http://localhost:3000/student-information");
+    window.location.replace("http://localhost:4000/student-information");
 
   };
 

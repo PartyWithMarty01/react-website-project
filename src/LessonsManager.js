@@ -4,6 +4,7 @@ function LessonsManager() {
     const[selectedStudent, setSelectedStudent] = useState('');
     const [students, setStudents] = useState({});
     const [showLessons, setShowLessons] = useState(false);
+    const [topic, setTopic] = useState('');
 
     useEffect(() => {
         fetchStudents();
@@ -30,7 +31,7 @@ function LessonsManager() {
         const res = await fetch('http://localhost:4000/lessons', {
                     method: 'PUT',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({student_id: selectedStudent})
+                    body: JSON.stringify({student_id: selectedStudent, topic})
                 });
             // const data = await res.json();
 
@@ -61,6 +62,16 @@ function LessonsManager() {
                 ))}
             </select>
             <button onClick={addLessons}>Create Lesson</button>
+            <hr />
+            <label>Choose Lesson Topic:</label>
+            <select value={topic} onChange={(e) => setTopic(e.target.value)}>
+                <option value=''>--Select Topic--</option>
+                    <option>Guitar</option>
+                    <option>Drums</option>
+                    <option>Bass</option>
+                    <option>Vocals</option>
+                    <option>Piano</option>
+            </select>
         
         </div>
         <hr />
