@@ -5,6 +5,7 @@ import CircleOfFifths from './CircleOfFifths';
 import GenStudentInfo from './GenStudentInfo';
 import RegistrationForm from './RegistrationForm';
 import LessonManager from "./LessonsManager.js";
+import TeachersManager from './TeachersManager.js';
 
 const chromaticScale = ['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#'];
 
@@ -69,6 +70,7 @@ function App() {
             <Link to="/student-information" style={{ margin: '10px' }}>Student Info</Link>
             <Link to="/registration-form" style={{ margin: '10px' }}>Registration Form</Link>
             <Link to="/lessons-manager" style={{ margin: '10px' }}>Lessons Manager</Link>
+            <Link to="/teachers" style={{ margin: '10px' }}>Teachers</Link>
           </nav>
 
           <Routes>
@@ -113,6 +115,7 @@ function App() {
             <Route path='/student-information' element={<GenStudentInfo />} />
             <Route path="/registration-form" element={<RegistrationForm />} />
             <Route path="/lessons-manager" element={<LessonManager/>}/>
+            <Route path="/teachers" element={<TeachersManager/>}/>
             
           </Routes>
         </header>
