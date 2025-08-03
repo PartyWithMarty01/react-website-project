@@ -7,7 +7,7 @@ const TeacherManager = () => {
   const [selectedTopics, setSelectedTopics] = useState([]);
 
   useEffect(() => {
-    fetch('/teachers')
+    fetch('http://localhost:4000/teachers')
       .then(res => res.json())
       .then(data => setTeachers(data));
     
@@ -22,13 +22,14 @@ const TeacherManager = () => {
       topic_ids: selectedTopics
     };
 
-    fetch('/teachers', {
+    fetch('http://localhost:4000/teachers', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newTeacher)
     })
     .then(res => res.json())
     .then(added => {
+      console.log("Added teacher:", added);
       setTeachers(prev => [...prev, added]);
       setName('');
       setSelectedTopics([]);
