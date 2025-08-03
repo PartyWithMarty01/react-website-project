@@ -5,10 +5,20 @@ function LessonsManager() {
     const [students, setStudents] = useState({});
     const [showLessons, setShowLessons] = useState(false);
     const [topic, setTopic] = useState('');
+    const [availableTeachers, setAvailableTeachers] = useState([]);
+    const [selectedTeacherId, setSelectedTeacherId] = useState('');
 
     useEffect(() => {
         fetchStudents();
     }, []);
+
+    useEffect(() => {
+        if (topic) {
+            fetch(`http://localhost:4000/teachers/topics/${topic}`)
+                .then(res => res.json())
+                .then(data => setAvailableTeachers(data))
+        }
+    }, [topic]);
 
     const fetchStudents = async () => {
         //This fecthes the students
@@ -31,7 +41,7 @@ function LessonsManager() {
         const res = await fetch('http://localhost:4000/lessons', {
                     method: 'PUT',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({student_id: selectedStudent, topic})
+                    body: JSON.stringify({student_id: selectedStudent, topic, teacher_id: selectedTeacherId})
                 });
             // const data = await res.json();
 
@@ -61,8 +71,7 @@ function LessonsManager() {
                     </option>
                 ))}
             </select>
-            <button onClick={addLessons}>Create Lesson</button>
-            <hr />
+
             <label>Choose Lesson Topic:</label>
             <select value={topic} onChange={(e) => setTopic(e.target.value)}>
                 <option value=''>--Select Topic--</option>
@@ -72,7 +81,21 @@ function LessonsManager() {
                     <option>Vocals</option>
                     <option>Piano</option>
             </select>
-        
+
+            {availableTeachers.length > 0 && (
+        <>
+          <label>Select Teacher:</label>
+          <select value={selectedTeacherId} onChange={(e) => setSelectedTeacherId(e.target.value)}>
+            <option value="">--Select Teacher--</option>
+            {availableTeachers.map(t => (
+              <option key={t.id} value={t.id}>{t.name}</option>
+            ))}
+          </select>
+        </>
+      )}
+
+      <button onClick={addLessons}>Create Lesson</button>
+            
         </div>
         <hr />
         <button onClick={() => setShowLessons((prev) => !prev)}>{showLessons ? "Hide Students & Lessons" : "Show Students & Lessons"}</button>
