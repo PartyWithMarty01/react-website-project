@@ -35,13 +35,13 @@ const TeacherManager = () => {
     });
   };
 
-  // Delete teacher
   const handleDeleteTeacher = (id) => {
-    fetch(`/teachers/${id}`, { method: 'DELETE' })
-      .then(() => setTeachers(prev => prev.filter(t => t.id !== id)));
-  };
+    fetch(`http://localhost:4000/teachers/${id}`, { method: 'DELETE' })
+    .then(() => {
+      setTeachers(prev => prev.filter(t => t.id !== id));
+    });
+};
 
-  // Handle multi-topic selection
   const handleTopicSelect = (e) => {
     const options = Array.from(e.target.selectedOptions);
     setSelectedTopics(options.map(opt => parseInt(opt.value)));
@@ -73,7 +73,7 @@ const TeacherManager = () => {
       <ul>
         {teachers.map(teacher => (
           <li key={teacher.id}>
-            {teacher.name} — Topics: {teacher.topics?.map(t => t.name).join(', ') || 'None'}
+            {teacher.name}
             <button onClick={() => handleDeleteTeacher(teacher.id)}>Delete</button>
           </li>
         ))}
