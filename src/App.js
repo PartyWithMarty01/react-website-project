@@ -6,6 +6,7 @@ import GenStudentInfo from './GenStudentInfo';
 import RegistrationForm from './RegistrationForm';
 import LessonManager from "./LessonsManager.js";
 import TeachersManager from './TeachersManager.js';
+import Hooks from './Hooks.js';
 
 const chromaticScale = ['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#'];
 
@@ -116,6 +117,7 @@ function App() {
             <Route path="/registration-form" element={<RegistrationForm />} />
             <Route path="/lessons-manager" element={<LessonManager/>}/>
             <Route path="/teachers" element={<TeachersManager/>}/>
+            <Route path="/hooks" element={<Hooks/>}/>
             
           </Routes>
         </header>

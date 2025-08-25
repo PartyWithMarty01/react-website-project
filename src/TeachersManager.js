@@ -6,15 +6,15 @@ const TeacherManager = () => {
   const [name, setName] = useState('');
   const [selectedTopics, setSelectedTopics] = useState([]);
 
-  useEffect(() => {
-    fetch('http://localhost:4000/teachers')
+    const fetchTeachers = () => fetch('http://localhost:4000/teachers')
       .then(res => res.json())
       .then(data => setTeachers(data));
+      console.log(teachers)
     
-    fetch('/topics')
+    const fetchTopics = () => fetch('/topics')
       .then(res => res.json())
       .then(data => setTopics(data));
-  }, []);
+  
 
   const handleAddTeacher = () => {
     const newTeacher = {
@@ -37,7 +37,10 @@ const TeacherManager = () => {
   };
 
   const handleDeleteTeacher = (id) => {
-    fetch(`http://localhost:4000/teachers/${id}`, { method: 'DELETE' })
+    fetch(`http://localhost:4000/teachers/${id}`, { 
+      method: 'DELETE'
+     
+    })
     .then(() => {
       setTeachers(prev => prev.filter(t => t.id !== id));
     });
@@ -72,11 +75,13 @@ const TeacherManager = () => {
 
       <h3>Current Teachers</h3>
       <ul>
+        <button onClick={fetchTeachers}>Show Teachers</button>
         {teachers.map(teacher => (
           <li key={teacher.id}>
             {teacher.name}
             <button onClick={() => handleDeleteTeacher(teacher.id)}>Delete</button>
           </li>
+
         ))}
       </ul>
     </div>
